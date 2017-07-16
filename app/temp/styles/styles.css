@@ -1123,6 +1123,7 @@ a {
 		top: 10px;
 		right: 10px;
 		z-index: 10;
+		cursor: pointer;
 	}
 
 .site-header__menu-icon::before {
@@ -1331,4 +1332,18 @@ a {
 			font-size: 1rem;
 			background-color: transparent
 	}
+	}
+
+.reveal-item {
+	opacity: 0;
+	-webkit-transition: all 1.5s ease-out;
+	transition: all 1.5s ease-out;
+	-webkit-transform: scale(1.15);
+	        transform: scale(1.15);
+}
+
+.reveal-item--is-visible {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		        transform: scale(1);
 	}
