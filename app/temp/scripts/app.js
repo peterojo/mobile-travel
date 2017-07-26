@@ -11093,8 +11093,8 @@ https://github.com/imakewebthings/waypoints/blob/master/licenses.txt
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_MobileMenu__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_RevealOnScroll__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_StickyHeader__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_StickyHeader__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_RevealOnScroll__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_Modal__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
@@ -11105,9 +11105,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var mobileMenu = new __WEBPACK_IMPORTED_MODULE_0__modules_MobileMenu__["a" /* default */]();
-new __WEBPACK_IMPORTED_MODULE_1__modules_RevealOnScroll__["a" /* default */](__WEBPACK_IMPORTED_MODULE_4_jquery___default()('.feature-item'), "85%");
-new __WEBPACK_IMPORTED_MODULE_1__modules_RevealOnScroll__["a" /* default */](__WEBPACK_IMPORTED_MODULE_4_jquery___default()('.testimonial'), "60%");
-var stickyHeader = new __WEBPACK_IMPORTED_MODULE_2__modules_StickyHeader__["a" /* default */]();
+new __WEBPACK_IMPORTED_MODULE_2__modules_RevealOnScroll__["a" /* default */](__WEBPACK_IMPORTED_MODULE_4_jquery___default()('.feature-item'), "85%");
+new __WEBPACK_IMPORTED_MODULE_2__modules_RevealOnScroll__["a" /* default */](__WEBPACK_IMPORTED_MODULE_4_jquery___default()('.testimonial'), "60%");
+var stickyHeader = new __WEBPACK_IMPORTED_MODULE_1__modules_StickyHeader__["a" /* default */]();
 var modal = new __WEBPACK_IMPORTED_MODULE_3__modules_Modal__["a" /* default */]();
 
 /***/ }),
@@ -11149,48 +11149,7 @@ class MobileMenu {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints__);
-
-
-
-class RevealOnScroll {
-	constructor(elements, offset) {
-		this.itemsToReveal = elements;
-		this.offsetPercentage = offset;
-		this.hideInitially();
-		this.createWayPoints();
-	}
-
-	hideInitially() {
-		this.itemsToReveal.addClass('reveal-item');
-	}
-
-	createWayPoints() {
-		var revealObject = this;
-		this.itemsToReveal.each(function () {
-			var currentItem = this;
-			new Waypoint({
-				element: currentItem,
-				handler: function () {
-					__WEBPACK_IMPORTED_MODULE_0_jquery___default()(currentItem).addClass('reveal-item--is-visible');
-				},
-				offset: revealObject.offsetPercentage
-			});
-		});
-	}
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (RevealOnScroll);
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery_smooth_scroll__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery_smooth_scroll__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery_smooth_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery_smooth_scroll__);
 
 
@@ -11198,6 +11157,7 @@ class RevealOnScroll {
 
 class StickyHeader {
 	constructor() {
+		this.lazyImages = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.lazyload');
 		this.siteHeader = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.site-header');
 		this.headerTriggerElement = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.large-hero__title');
 		this.createHeaderWaypoint();
@@ -11205,6 +11165,13 @@ class StickyHeader {
 		this.headerLinks = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.primary-nav a');
 		this.createPageSectionWaypoints();
 		this.addSmoothScrolling();
+		this.refreshWaypoints();
+	}
+
+	refreshWaypoints() {
+		this.lazyImages.on('load', function () {
+			Waypoint.refreshAll();
+		});
 	}
 
 	addSmoothScrolling() {
@@ -11258,7 +11225,7 @@ class StickyHeader {
 /* harmony default export */ __webpack_exports__["a"] = (StickyHeader);
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11623,6 +11590,47 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__node_modules_waypoints_lib_noframework_waypoints__);
+
+
+
+class RevealOnScroll {
+	constructor(elements, offset) {
+		this.itemsToReveal = elements;
+		this.offsetPercentage = offset;
+		this.hideInitially();
+		this.createWayPoints();
+	}
+
+	hideInitially() {
+		this.itemsToReveal.addClass('reveal-item');
+	}
+
+	createWayPoints() {
+		var revealObject = this;
+		this.itemsToReveal.each(function () {
+			var currentItem = this;
+			new Waypoint({
+				element: currentItem,
+				handler: function () {
+					__WEBPACK_IMPORTED_MODULE_0_jquery___default()(currentItem).addClass('reveal-item--is-visible');
+				},
+				offset: revealObject.offsetPercentage
+			});
+		});
+	}
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (RevealOnScroll);
 
 /***/ }),
 /* 7 */
